@@ -88,27 +88,39 @@
 
   // ----- (3) -----
   // Remove the last paragraph in the article.
-  $('article p').last().remove()
+  // $('article p').last().remove() <--- my original method
+  $('article p:last-child').remove() // <--- suggested solution
 
   // ----- (4) -----
   // Set the font size of the title to be a random pixel size from 0 to 100.
-  $('#title').css('font-size',function(){
-    return Math.random()*100
-  })
+  // $('#title').css('font-size',function(){ 
+  //   return Math.random()*100
+  // }) <--- my original method
+  $('#title').css('font-size',Math.random()*100) // <--- suggested solution
 
   // ----- (5) -----
   // Add an item to the list; it can say whatever you want.
-  $('<li>New item added to this list.</li>').appendTo('ol')
+  // $('<li>New item added to this list.</li>').appendTo('ol') <--- my original method
+  $('ol').append($('<li>',{text:'New item added to this list.'})) // <--- incorporating suggested solution
 
   // ----- (6) -----
   // Scratch that; the list is silly. Empty the aside and put a paragraph in it apologizing for the list’s existence.
-  $('aside').empty().append('<p>OMG I am so sorry for that ridiculous list!</p>').css('font-size','50px').css('color','teal')
+  // $('aside').empty().append('<p>OMG I am so sorry for that ridiculous list!</p>').css('font-size','50px').css('color','teal') <--- my original method
+  $('aside')
+    .empty()
+    .append($('<p>',{text:'OMG I am so sorry for that ridiculous list!'}))
+    .css('font-size','50px').css('color','teal') // <--- incorporating suggested solution
 
   // ----- (7) -----
   // When you change the numbers in the three inputs on the bottom, the background color of the body should change to match whatever the three values in the inputs are.
+  // $('.form-control').on('change',function(){
+  //   const rgb = `rgb(${$('.form-control').eq(0).val()},${$('.form-control').eq(1).val()},${$('.form-control').eq(2).val()})`
+  //   $('body').css('background-color',rgb) // <--- my original method
   $('.form-control').on('change',function(){
-    const rgb = `rgb(${$('.form-control').eq(0).val()},${$('.form-control').eq(1).val()},${$('.form-control').eq(2).val()})`
-    $('body').css('background-color',rgb)
+    const red = $('.form-control').eq(0).val()
+    const blue=$('.form-control').eq(1).val()
+    const green=$('.form-control').eq(2).val()
+    $('body').css('background-color',"rgb("+red+","+green+","+blue+")") // <--- incorporating suggested solutions
   })
 
   // ----- (8) -----
